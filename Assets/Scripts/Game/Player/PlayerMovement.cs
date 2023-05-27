@@ -6,7 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
+
+    [SerializeField] private float _rotationSpeed;
+
     private Rigidbody2D _rigidbody;
+
     private Vector2 _movementInput;
     private Vector2 _smoothedMovementInput;
     private Vector2 _movementInputSmoothVelocity;
@@ -18,6 +22,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        SetPlayerVelocity();
+        RotateInDirectionOfInput();
+    }
+
+    private void SetPlayerVelocity()
+    {
         //_rigidbody.velocity =  new Vector2(1, 0.5f);
         _smoothedMovementInput = Vector2.SmoothDamp(
             _smoothedMovementInput,
@@ -25,7 +35,17 @@ public class PlayerMovement : MonoBehaviour
             ref _movementInputSmoothVelocity,
             0.1f
         );
-        _rigidbody.velocity =  _smoothedMovementInput * _speed;
+        _rigidbody.velocity = _smoothedMovementInput * _speed;
+    }
+
+    private void RotateInDirectionOfInput()
+    {
+        if (_movementInput != Vector2.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _smoothedMovementInput);
+            Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+            _rigidbody.MoveRotation(rotation);
+        }
     }
 
     private void OnMove(InputValue inputValue)
