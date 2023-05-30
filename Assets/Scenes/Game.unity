@@ -622,6 +622,7 @@ GameObject:
   - component: {fileID: 1097786536}
   - component: {fileID: 1097786534}
   - component: {fileID: 1097786535}
+  - component: {fileID: 1097786537}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -744,6 +745,20 @@ MonoBehaviour:
   _bulletSpeed: 8
   _gunOffset: {fileID: 245327887}
   _timeBetweenShots: 0.5
+--- !u!114 &1097786537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097786529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8800b802abc6d74b9dc0c4d9e392fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 100
+  _maximumHealh: 100
 --- !u!1001 &1189750833
 PrefabInstance:
   m_ObjectHideFlags: 0
